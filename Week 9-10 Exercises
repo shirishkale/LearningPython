@@ -38,10 +38,17 @@ hrcnt = dict()
 for line in handle:
     if not line.startswith("From"): continue
     fields = line.split()
-    tm=fields[5]
-    tmsplit=tm.split(":")
-    hr=tmsplit[0]
-    if hr not in hrcnt:
-        hrcnt[hr] = 1
-    else:
-        hrcnt[hr] = hrcnt[hr] + 1
+    if len(fields) == 7:
+       tmstr=fields[5]
+       hrstr=tmstr.split(":")
+       hr=hrstr[0]
+       if hr not in hrcnt:
+          hrcnt[hr] = 1
+       else:
+          hrcnt[hr] = hrcnt[hr] + 1
+lst = list()
+for key,val in hrcnt.items():
+    lst.append( (key,val) )
+lst.sort()
+for key,val in lst:
+    print key,val
